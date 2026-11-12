@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "CDC",
+    " R "
+  ],
+  "key": {
+    "B": {
+      "item": "create_skybound:aero_brass_sheet"
+    },
+    "C": {
+      "item": "create_skybound:aero_brass_casing"
+    },
+    "D": {
+      "item": "minecraft:dispenser"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "id": "create_skybound:ballast_vent",
+    "count": 1
+  }
+}

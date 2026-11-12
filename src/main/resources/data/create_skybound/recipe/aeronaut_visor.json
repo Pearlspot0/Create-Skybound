@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "L L",
+    "BGB",
+    " G "
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "B": {
+      "item": "create_skybound:aero_brass_sheet"
+    },
+    "G": {
+      "item": "minecraft:tinted_glass"
+    }
+  },
+  "result": {
+    "id": "create_skybound:aeronaut_visor",
+    "count": 1
+  }
+}

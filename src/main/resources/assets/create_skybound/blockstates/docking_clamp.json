@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "create_skybound:block/docking_clamp"
+    },
+    "facing=south": {
+      "model": "create_skybound:block/docking_clamp",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "create_skybound:block/docking_clamp",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "create_skybound:block/docking_clamp",
+      "y": 90
+    }
+  }
+}

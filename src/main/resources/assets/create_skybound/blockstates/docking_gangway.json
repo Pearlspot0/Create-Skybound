@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "create_skybound:block/docking_gangway"
+    },
+    "facing=south": {
+      "model": "create_skybound:block/docking_gangway",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "create_skybound:block/docking_gangway",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "create_skybound:block/docking_gangway",
+      "y": 90
+    }
+  }
+}

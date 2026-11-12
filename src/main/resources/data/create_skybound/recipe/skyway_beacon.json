@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GLG",
+    "BCB"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "L": {
+      "item": "minecraft:lantern"
+    },
+    "B": {
+      "item": "create_skybound:aero_brass_sheet"
+    },
+    "C": {
+      "item": "create_skybound:aero_brass_casing"
+    }
+  },
+  "result": {
+    "id": "create_skybound:skyway_beacon",
+    "count": 1
+  }
+}

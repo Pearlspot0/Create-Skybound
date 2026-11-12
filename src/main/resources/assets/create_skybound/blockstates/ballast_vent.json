@@ -1,0 +1,29 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "create_skybound:block/ballast_vent"
+    },
+    "facing=down": {
+      "model": "create_skybound:block/ballast_vent",
+      "x": 180
+    },
+    "facing=north": {
+      "model": "create_skybound:block/ballast_vent",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "create_skybound:block/ballast_vent",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "create_skybound:block/ballast_vent",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east": {
+      "model": "create_skybound:block/ballast_vent",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "WWW",
+    "BBB"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:slime_ball"
+    },
+    "W": {
+      "item": "minecraft:black_wool"
+    },
+    "B": {
+      "item": "create_skybound:aero_brass_sheet"
+    }
+  },
+  "result": {
+    "id": "create_skybound:airship_bumper",
+    "count": 2
+  }
+}

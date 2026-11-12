@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " L ",
+    "SCS",
+    "RRR"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:lightning_rod"
+    },
+    "S": {
+      "item": "minecraft:spyglass"
+    },
+    "C": {
+      "item": "create_skybound:aero_brass_casing"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    }
+  },
+  "result": {
+    "id": "create_skybound:airspace_radar",
+    "count": 1
+  }
+}

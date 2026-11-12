@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "create_skybound:block/aero_brass_casing"
+    }
+  }
+}

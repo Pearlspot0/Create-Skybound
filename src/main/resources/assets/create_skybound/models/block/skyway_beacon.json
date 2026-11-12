@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "create_skybound:block/aero_brass_casing",
+    "side": "create_skybound:block/skyway_beacon"
+  }
+}

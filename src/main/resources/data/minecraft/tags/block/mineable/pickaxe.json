@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "create_skybound:aero_brass_casing",
+    "create_skybound:aero_brass_strut",
+    "create_skybound:mooring_winch",
+    "create_skybound:mooring_cleat",
+    "create_skybound:docking_clamp",
+    "create_skybound:docking_gangway",
+    "create_skybound:altimeter_gauge",
+    "create_skybound:variometer_gauge",
+    "create_skybound:airspeed_gauge",
+    "create_skybound:airspace_radar",
+    "create_skybound:skyway_beacon",
+    "create_skybound:ballast_vent"
+  ]
+}

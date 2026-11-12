@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CC ",
+    " IP",
+    "  L"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "minecraft:lever"
+    },
+    "L": {
+      "item": "minecraft:stripped_oak_wood"
+    }
+  },
+  "result": {
+    "id": "create_skybound:flare_gun",
+    "count": 1
+  }
+}

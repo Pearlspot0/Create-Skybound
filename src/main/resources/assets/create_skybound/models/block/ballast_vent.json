@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "create_skybound:block/ballast_vent",
+    "up": "create_skybound:block/ballast_vent",
+    "down": "create_skybound:block/aero_brass_casing",
+    "north": "create_skybound:block/aero_brass_casing",
+    "south": "create_skybound:block/aero_brass_casing",
+    "east": "create_skybound:block/aero_brass_casing",
+    "west": "create_skybound:block/aero_brass_casing"
+  }
+}

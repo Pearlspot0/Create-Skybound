@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "BKB",
+    " R "
+  ],
+  "key": {
+    "B": {
+      "item": "create_skybound:aero_brass_sheet"
+    },
+    "K": {
+      "item": "minecraft:clock"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "id": "create_skybound:airspeed_gauge",
+    "count": 1
+  }
+}

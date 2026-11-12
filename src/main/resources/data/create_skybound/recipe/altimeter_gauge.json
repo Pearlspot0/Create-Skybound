@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "BCB",
+    " R "
+  ],
+  "key": {
+    "B": {
+      "item": "create_skybound:aero_brass_sheet"
+    },
+    "C": {
+      "item": "minecraft:compass"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "id": "create_skybound:altimeter_gauge",
+    "count": 1
+  }
+}

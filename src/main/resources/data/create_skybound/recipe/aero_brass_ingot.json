@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " F ",
+    "GBG",
+    " F "
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "G": {
+      "item": "minecraft:gold_nugget"
+    },
+    "B": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "result": {
+    "id": "create_skybound:aero_brass_ingot",
+    "count": 2
+  }
+}

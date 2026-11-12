@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "create_skybound:block/altimeter_gauge",
+    "north": "create_skybound:block/altimeter_gauge",
+    "south": "create_skybound:block/aero_brass_casing",
+    "east": "create_skybound:block/aero_brass_casing",
+    "west": "create_skybound:block/aero_brass_casing",
+    "up": "create_skybound:block/aero_brass_casing",
+    "down": "create_skybound:block/aero_brass_casing"
+  }
+}

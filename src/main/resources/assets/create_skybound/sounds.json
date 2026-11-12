@@ -1,0 +1,66 @@
+{
+  "winch_wind": {
+    "subtitle": "subtitles.create_skybound.winch_wind",
+    "sounds": [
+      "minecraft:block/copper/hit1",
+      "minecraft:block/copper/hit2"
+    ]
+  },
+  "clamp_lock": {
+    "subtitle": "subtitles.create_skybound.clamp_lock",
+    "sounds": [
+      "minecraft:block/iron_trapdoor/close",
+      "minecraft:block/anvil/place"
+    ]
+  },
+  "clamp_unlock": {
+    "subtitle": "subtitles.create_skybound.clamp_unlock",
+    "sounds": [
+      "minecraft:block/iron_trapdoor/open"
+    ]
+  },
+  "gangway_extend": {
+    "subtitle": "subtitles.create_skybound.gangway_extend",
+    "sounds": [
+      "minecraft:block/piston/extend"
+    ]
+  },
+  "radar_ping": {
+    "subtitle": "subtitles.create_skybound.radar_ping",
+    "sounds": [
+      "minecraft:block/note_block/bell"
+    ]
+  },
+  "radar_alert": {
+    "subtitle": "subtitles.create_skybound.radar_alert",
+    "sounds": [
+      "minecraft:block/beacon/power_select",
+      "minecraft:block/note_block/iron_xylophone"
+    ]
+  },
+  "beacon_pulse": {
+    "subtitle": "subtitles.create_skybound.beacon_pulse",
+    "sounds": [
+      "minecraft:block/beacon/ambient"
+    ]
+  },
+  "ballast_vent": {
+    "subtitle": "subtitles.create_skybound.ballast_vent",
+    "sounds": [
+      "minecraft:block/fire/extinguish"
+    ]
+  },
+  "flare_fire": {
+    "subtitle": "subtitles.create_skybound.flare_fire",
+    "sounds": [
+      "minecraft:entity/firework_rocket/launch"
+    ]
+  },
+  "bumper_impact": {
+    "subtitle": "subtitles.create_skybound.bumper_impact",
+    "sounds": [
+      "minecraft:block/wool/hit1",
+      "minecraft:block/wool/place"
+    ]
+  }
+}

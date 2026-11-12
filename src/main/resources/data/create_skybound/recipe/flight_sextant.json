@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "NAN",
+    "BBB"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:spyglass"
+    },
+    "N": {
+      "item": "minecraft:gold_nugget"
+    },
+    "A": {
+      "item": "minecraft:compass"
+    },
+    "B": {
+      "item": "create_skybound:aero_brass_sheet"
+    }
+  },
+  "result": {
+    "id": "create_skybound:flight_sextant",
+    "count": 1
+  }
+}

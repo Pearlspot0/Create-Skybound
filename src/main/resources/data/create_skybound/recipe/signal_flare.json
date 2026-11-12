@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "DRG",
+    " B "
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "D": {
+      "item": "minecraft:red_dye"
+    },
+    "R": {
+      "item": "minecraft:gunpowder"
+    },
+    "G": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "B": {
+      "item": "create_skybound:aero_brass_sheet"
+    }
+  },
+  "result": {
+    "id": "create_skybound:signal_flare",
+    "count": 4
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "SCS",
+    " R "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "S": {
+      "item": "create_skybound:mooring_cable"
+    },
+    "C": {
+      "item": "create_skybound:aero_brass_casing"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "id": "create_skybound:mooring_winch",
+    "count": 1
+  }
+}

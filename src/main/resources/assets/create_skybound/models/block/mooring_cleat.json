@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "create_skybound:block/mooring_cleat",
+    "north": "create_skybound:block/mooring_cleat",
+    "south": "create_skybound:block/mooring_cleat",
+    "east": "create_skybound:block/mooring_cleat",
+    "west": "create_skybound:block/mooring_cleat",
+    "up": "create_skybound:block/mooring_cleat",
+    "down": "create_skybound:block/aero_brass_casing"
+  }
+}

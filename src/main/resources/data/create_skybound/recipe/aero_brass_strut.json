@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B B",
+    " B ",
+    "B B"
+  ],
+  "key": {
+    "B": {
+      "item": "create_skybound:aero_brass_ingot"
+    }
+  },
+  "result": {
+    "id": "create_skybound:aero_brass_strut",
+    "count": 4
+  }
+}
