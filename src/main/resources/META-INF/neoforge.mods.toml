@@ -1,24 +1,24 @@
 modLoader="javafml"
-loaderVersion="${loader_version_range}"
-license="${mod_license}"
+loaderVersion="[4,)"
+license="MIT"
 
 [[mods]]
-modId="${mod_id}"
-version="${mod_version}"
-displayName="${mod_name}"
-description='''${mod_description}'''
-authors="${mod_authors}"
+modId="create_skybound"
+version="1.0.0"
+displayName="Create: Skybound"
+description='''Aeronautics Mooring, Sky Docks, Avionics & Fleet Logistics for All of Create.'''
+authors="AllOfCreateTeam"
 
-[[dependencies.${mod_id}]]
+[[dependencies.create_skybound]]
 modId="neoforge"
 type="required"
-versionRange="${neo_version_range}"
+versionRange="[21.1,)"
 ordering="NONE"
 side="BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies.create_skybound]]
 modId="minecraft"
 type="required"
-versionRange="${minecraft_version_range}"
+versionRange="[1.21.1,1.22)"
 ordering="NONE"
 side="BOTH"
