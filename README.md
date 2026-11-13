@@ -1,79 +1,114 @@
-# Create: Skybound
+# FlowCE for TI-84 Evo / TI-84 Plus CE Python
 
-**Aeronautics Mooring, Sky Docks, Avionics & Fleet Logistics for Minecraft 1.21.1 (NeoForge)**  
-*Engineered as a complimentary expansion for the latest **All of Create** (Aeronautics) modpack.*
-
----
-
-## 🛩️ Overview
-
-In the **All of Create** ecosystem, players construct monumental moving contraptions: massive cargo zeppelins, scout monoplanes, dreadnoughts, and ground locomotives. However, operating airborne fleets alongside stationary factories introduces critical logistical gaps:
-- How do you safely berth a drifting 500-ton airship against a tower without collision damage?
-- How do you navigate through low clouds, fog, and mountain ranges without GPS?
-- How do you detect incoming hostile aircraft or long-range artillery shells from *Create: Big Cannons*?
-
-**Create: Skybound** ties the entire modpack experience together by delivering industrial skyport mooring systems, real-time cockpit avionics, tactical early-warning airspace radar, extendable boarding gangways, and aeronautical brass materials.
+A pure-Python rewrite of the **FlowCE** Computer Algebra System (CAS), engineered specifically for the **TI-84 Evo** and **TI-84 Plus CE Python** graphing calculators.
 
 ---
 
-## ⚙️ Core Features & Mechanics
+## 🌟 Overview
 
-### ⚓ 1. Mooring & Skyport Berthing Systems
-* **Mooring Winch (`mooring_winch`)**: A motorized kinetic block that reels in attached vessels and mobile entities. When given redstone power, it reels in tethered airships toward the docking cradle, gently canceling drift.
-* **Mooring Cleat (`mooring_cleat`)**: A compact brass anchor bollard placed on airship hulls and docking pylons.
-* **High-Tensile Mooring Cable (`mooring_cable`)**: Right-click an anchor point and then a second cleat or winch (up to 48 blocks) to establish a physical tether with dynamic sag and particle effects. Sneak-click to release.
-* **Pneumatic Docking Clamp (`docking_clamp`)**: An industrial magnetic/pneumatic docking lock. When activated, rigidly aligns and holds contraptions motionless in the docking bay. Emits Redstone comparator signal `15` when a vessel is securely docked.
-* **Retractable Docking Gangway (`docking_gangway`)**: Extendable brass passenger and crew walkway. When powered or interacted with, deploys a solid walkway directly out to the airship hatchway so crew never plunge into the void.
+The original FlowCE CAS was written in native eZ80 C / Assembly. With newer OS protections and new hardware platforms like the TI-84 Evo, running native C/ASM binaries requires complex jailbreak workarounds. 
+
+This repository provides **FlowCE Python Edition**—a clean, self-contained, high-performance pure-Python CAS engine that runs natively inside Texas Instruments' MicroPython / CircuitPython environment without requiring jailbreaks, custom OS patches, or external dependencies.
 
 ---
 
-### 🎛️ 2. Cockpit Avionics & Flight Instrumentation
-* **Aero Altimeter Gauge (`altimeter_gauge`)**: Analog brass gauge displaying altitude relative to sea level (MSL) and world height (-64 to 320m). Outputs Redstone comparator signals proportional to altitude.
-* **Variometer (`variometer_gauge`)**: Vertical speed indicator measuring rate of climb or descent (m/s). Crucial for preventing stall or ground collision during instrument flight.
-* **Airspeed Indicator (`airspeed_gauge`)**: Measures horizontal velocity through the atmosphere.
-* **Aeronaut Flight Visor (`aeronaut_visor`)**: Wearable aviator visor providing an in-game HUD overlay displaying compass heading (000°–359°), MSL altitude, vertical speed warning, and distance/bearing to the nearest Skyway Beacon.
+## 🚀 Key Features
+
+* **Strict Hardware Compatibility**: Built for the Python 3.4 / CircuitPython baseline on TI graphing calculators:
+  * Zero f-strings (uses `%` string formatting).
+  * Zero `re` regex engine dependencies (features custom lexer and recursive-descent parser).
+  * 100% standard library; runs within calculator memory limits.
+* **Exact Rational Arithmetic**: Fractions and coefficients remain exact (e.g. `1/3`, `9/2`, `-5/4`) instead of losing precision to floating-point decimals.
+* **Symbolic Differentiation**:
+  * Power rule, product rule, quotient rule, and chain rule.
+  * Trigonometric (`sin`, `cos`, `tan`), exponential (`exp`), logarithmic (`ln`, `log`), and polynomial terms.
+  * Step-by-step differentiation explanations (`diff_steps()`).
+* **Symbolic & Definite Integration**:
+  * Exact antiderivatives and definite integration via Fundamental Theorem of Calculus.
+  * Numerical Riemann sum approximations (`riemann_sum()`).
+* **Limits & Taylor Series**:
+  * Limits via direct substitution, algebraic factoring, and L'Hôpital's rule steps.
+  * Maclaurin and Taylor polynomial expansions to order $n$.
+* **Calculus Geometry**:
+  * Tangent line and normal line calculations at point $x = c$.
+* **Dual-Mode UI / CLI**:
+  * Direct calculator LCD display support via `ti_system` and `ti_draw`.
+  * Fallback to terminal REPL and CLI batch flags on PC.
 
 ---
 
-### 📡 3. Skyway Navigation & Airspace Defense
-* **Airspace Radar Console (`airspace_radar`)**: Early-warning sector radar with a phosphor-green cathode display. Scans a 64-block spherical airspace for moving aircraft, airborne players (elytra/jetpack), phantoms, and fast-moving artillery projectiles (such as *Big Cannons* shells).
-  - Emits audio alerts and Redstone signals when contacts enter the perimeter.
-  - Right-click for real-time tactical sector reports in chat!
-* **Skyway Navigation Beacon (`skyway_beacon`)**: High-intensity aerial light beacon and radio transponder projecting vertical guidance beams. Can be colored using any vanilla dye.
-* **Aeronaut's Flight Sextant (`flight_sextant`)**: Handheld navigation instrument. Right-click to calculate range, bearing, and altitude delta to the nearest Skyway Beacon in the dimension.
-* **Airship IFF Transponder Key (`transponder_key`)**: Identity token for automated skyport clearance and traffic control.
+## 📲 Installation on TI-84 Evo / CE
+
+1. Connect your TI-84 Evo or TI-84 Plus CE Python to your computer via USB-C.
+2. Open **TI Connect CE** (or your preferred calculator file manager).
+3. Transfer [`flowce.py`](flowce.py) to your calculator's Python app storage.
+4. On the calculator:
+   * Press **[prgm]**
+   * Select **Python**
+   * Select **`FLOWCE`** and press **[enter]** to run.
 
 ---
 
-### 🛡️ 4. Airframe Protection & Tactical Utilities
-* **Padded Airship Bumper (`airship_bumper`)**: Quilted, reinforced bumper blocks for airship keels and docking docks. Completely negates kinetic collision damage and fall damage with a gentle damped rebound.
-* **Ballast Thrust Vent (`ballast_vent`)**: High-pressure pneumatic jet vent that exhausts compressed air to lift airships or launch crew members.
-* **Pneumatic Flare Gun & Parachute Signal Flares (`flare_gun`, `signal_flare`)**: Fires high-luminosity pyrotechnic flares that drift down on micro-parachutes, illuminating landing runways or marking targets for naval bombardments.
-* **Aero-Brass Alloy (`aero_brass_ingot`, `aero_brass_sheet`, `aero_brass_casing`, `aero_brass_strut`)**: Lightweight aeronautical alloy framework with high blast resistance against cannon shrapnel and reduced weight for aeronautic flight physics.
+## 💻 Running & Testing on PC
 
----
-
-## 🔧 Create & Modpack Compatibility
-
-- **Create Wrench Support**: Right-clicking any Skybound block with Create's Wrench (or any item in `#c:tools/wrench`) rotates its orientation; sneak-right-clicking cleanly dismantles it.
-- **Common Tags**: Fully registered under standard common tags (`#c:ingots/brass`, `#c:plates/brass`, `#minecraft:mineable/pickaxe`, etc.).
-- **Soft Dependency Design**: Zero crash hazards if specific optional mods are updated or removed. Runs seamlessly both standalone and inside complete modpacks.
-
----
-
-## 📦 Installation for "All of Create"
-
-1. Ensure your modpack is running **Minecraft 1.21.1** with **NeoForge** (21.1.x).
-2. Grab the pre-built jar file:
-   - Located at: `build/libs/create_skybound-1.0.0.jar`
-3. Drop `create_skybound-1.0.0.jar` into your modpack instance's `mods/` directory.
-4. Launch and conquer the skies!
-
----
-
-## 🛠️ Building From Source
+### CLI Usage
+You can run and test `flowce.py` directly from the terminal:
 
 ```bash
-./gradlew build
+# Symbolic differentiation
+python3 flowce.py --diff "x^3 + sin(x)" x
+# Output: 3*x^2 + cos(x)
+
+# Symbolic integration
+python3 flowce.py --int "3*x^2 + cos(x)" x
+# Output: x^3 + sin(x)
+
+# Algebraic simplification
+python3 flowce.py --sim "2*x + 3*x - x + 5 - 2"
+# Output: 4*x + 3
 ```
-The compiled mod file is generated at `build/libs/create_skybound-1.0.0.jar`.
+
+### Python API
+```python
+import flowce
+
+# Step-by-step derivative
+steps = flowce.diff_steps("sin(x^2)", "x")
+for s in steps:
+    print(s)
+
+# Tangent line to y = x^2 at x = 2
+print(flowce.tangent_line("x^2", "x", 2))
+# Output: 4*x - 4
+
+# Normal line to y = x^2 at x = 2
+print(flowce.normal_line("x^2", "x", 2))
+# Output: -1/4*x + 9/2
+```
+
+### Automated PC Test Suite
+Hardware mocks for TI proprietary modules (`ti_system`, `ti_draw`, `ti_plotlib`, `ti_hub`) are included in the repository so you can test headlessly on PC:
+
+```bash
+pytest -v
+```
+
+All 134 automated unit and property tests cover:
+- Syntax & AST compliance (Python 3.4 enforcement)
+- TI hardware mock verification
+- Lexer & Precedence Parser
+- Exact Rational Arithmetic
+- Algebraic Simplification
+- Derivatives, Integrals & Step-by-Step solutions
+- Limits, Series & Calculus Geometry
+- Tier 4 AP Calculus & Kinematics Physics Scenarios
+
+---
+
+## 📁 Repository Structure
+
+* `flowce.py` - Core standalone Python CAS engine for TI-84 Evo.
+* `ti_system.py`, `ti_draw.py`, `ti_plotlib.py`, `ti_hub.py` - TI hardware mock modules for PC testing.
+* `tests/` - Comprehensive test suite (134 tests).
+* `TEST_INFRA.md` - Test architecture and coverage documentation.
+* `minecraft_mod/` - Archived files from the prior Create: Skybound Minecraft mod project.

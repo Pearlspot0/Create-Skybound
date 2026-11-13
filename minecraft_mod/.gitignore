@@ -1,0 +1,6 @@
+.gradle/
+build/*
+!build/libs/
+build/libs/*
+!build/libs/create_skybound-1.0.0.jar
+*.log
