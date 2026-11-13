@@ -37,15 +37,43 @@ This repository provides **FlowCE Python Edition**—a clean, self-contained, hi
 
 ---
 
+## 🛠️ Resolving `MemoryError` on TI-84 Evo / CE
+
+Graphing calculators like the TI-84 Evo and TI-84 Plus CE Python share **154 KB of total RAM** between OS variables (TI-BASIC programs, lists L1–L6, matrices, pictures) and the sandboxed MicroPython execution heap. If your free RAM is low, MicroPython cannot allocate enough compiler buffer space and will raise:
+```text
+MemoryError: memory allocation failed, allocating ... bytes
+```
+
+### Quick Fix Steps:
+
+1. **Check Your Available RAM:**
+   * Press `[2nd]` + `[+]` (MEM).
+   * Select `2:Mem Management/Delete...`.
+   * Check the number next to **`RAM FREE`**. If it is below ~60–80 KB, your RAM is cluttered with other calculator data.
+
+2. **Archive Unused Programs & Variables to Flash ROM:**
+   * In `Mem Management/Delete...`, select `7:Program...` (or `1:All...`).
+   * Scroll to programs, matrices, or large lists and press `[enter]` to toggle the **Archive** status (an asterisk `*` appears next to archived items).
+   * *Note:* Archived programs and data are safely stored in your 3 MB Flash ROM and do not consume active RAM!
+
+3. **Reset the Python Environment:**
+   * If you recently ran another script in Python, exit the Python App completely to release the MicroPython shell memory, then relaunch it.
+
+4. **Choose the Right Edition for Your Device:**
+   * **`flowce.py` (Standard Edition, ~36 KB)**: Full CAS engine with step-by-step differentiation explanations, Taylor series, limits/L'Hôpital's rule, and calculus geometry (tangent/normal lines). Recommended when you have $\ge 70$ KB of free RAM.
+   * **[`flowce_lite.py`](flowce_lite.py) (Lite Edition, ~18 KB)**: Streamlined, ultra-compact CAS engine with exact fractions, symbolic differentiation, symbolic & definite integrals, algebraic simplification, and interactive REPL. Recommended for memory-constrained environments or when you have many active variables in RAM.
+
+---
+
 ## 📲 Installation on TI-84 Evo / CE
 
 1. Connect your TI-84 Evo or TI-84 Plus CE Python to your computer via USB-C.
-2. Open **TI Connect CE** (or your preferred calculator file manager).
-3. Transfer [`flowce.py`](flowce.py) to your calculator's Python app storage.
+2. Open **TI Connect CE**.
+3. Drag and drop [`flowce.py`](flowce.py) (or [`flowce_lite.py`](flowce_lite.py)) onto your calculator.
 4. On the calculator:
    * Press **[prgm]**
    * Select **Python**
-   * Select **`FLOWCE`** and press **[enter]** to run.
+   * Select **`FLOWCE`** (or **`FLOWCELI`**) and press **[enter]** to run.
 
 ---
 
