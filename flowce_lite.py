@@ -7,6 +7,7 @@ try:
 except ImportError: pass
 try:
     import ti_system
+    import ti_draw
     HAS_TI = True
 except ImportError: HAS_TI = False
 
@@ -408,23 +409,206 @@ def _in(n, v):
         if n.name == "exp": return Function("exp", sy)
     return Mul(n, sy)
 
-def main():
+MENU_ITEMS = [
+    "1. Differentiate  (d/dx)",
+    "2. Integrate      (S dx)",
+    "3. Simplify Expression",
+    "4. Evaluate / Subs",
+    "5. Interactive Shell",
+]
+
+def draw_gui_menu(selected=0):
+    if not HAS_TI: return
+    try:
+        ti_draw.clear()
+        ti_draw.set_color(18, 48, 88)
+        ti_draw.fill_rect(0, 0, 320, 24)
+        ti_draw.set_color(40, 140, 230)
+        ti_draw.fill_rect(0, 24, 320, 2)
+        ti_draw.set_color(255, 255, 255)
+        ti_draw.draw_text(8, 6, "FlowCE Lite CAS")
+        ti_draw.set_color(120, 200, 255)
+        ti_draw.draw_text(210, 6, "v1.1 [Evo Edition]")
+        ti_draw.set_color(25, 30, 42)
+        ti_draw.fill_rect(8, 28, 304, 182)
+        ti_draw.set_color(45, 55, 75)
+        ti_draw.draw_rect(8, 28, 304, 182)
+        for i, item in enumerate(MENU_ITEMS):
+            y = 38 + i * 26
+            if i == selected:
+                ti_draw.set_color(38, 75, 125)
+                ti_draw.fill_rect(12, y - 2, 296, 22)
+                ti_draw.set_color(255, 255, 255)
+            else:
+                ti_draw.set_color(200, 215, 235)
+            ti_draw.draw_text(16, y, item)
+        ti_draw.set_color(14, 20, 30)
+        ti_draw.fill_rect(0, 214, 320, 26)
+        ti_draw.set_color(160, 200, 240)
+        ti_draw.draw_text(8, 220, "[1-5] Select | [^/v] Move | [CLEAR] Exit")
+    except Exception: pass
+
+def draw_result_screen(title, query, result):
+    if not HAS_TI:
+        print("--- %s ---\nInput:  %s\nResult: %s" % (str(title), str(query), str(result)))
+        return
+    try:
+        ti_draw.clear()
+        ti_draw.set_color(18, 48, 88)
+        ti_draw.fill_rect(0, 0, 320, 24)
+        ti_draw.set_color(40, 140, 230)
+        ti_draw.fill_rect(0, 24, 320, 2)
+        ti_draw.set_color(255, 255, 255)
+        ti_draw.draw_text(8, 6, "FlowCE Lite - " + str(title)[:24])
+        ti_draw.set_color(25, 30, 42)
+        ti_draw.fill_rect(8, 28, 304, 182)
+        ti_draw.set_color(40, 140, 230)
+        ti_draw.draw_rect(8, 28, 304, 182)
+        ti_draw.set_color(130, 165, 205)
+        ti_draw.draw_text(16, 36, "Input:")
+        ti_draw.set_color(255, 255, 255)
+        ti_draw.draw_text(16, 54, str(query)[:36])
+        ti_draw.set_color(45, 55, 75)
+        ti_draw.draw_line(16, 76, 296, 76)
+        ti_draw.set_color(80, 220, 140)
+        ti_draw.draw_text(16, 88, "Result:")
+        ti_draw.set_color(255, 255, 255)
+        rs = str(result)
+        ti_draw.draw_text(16, 108, rs[:36])
+        if len(rs) > 36: ti_draw.draw_text(16, 128, rs[36:72])
+        if len(rs) > 72: ti_draw.draw_text(16, 148, rs[72:108])
+        ti_draw.set_color(18, 48, 88)
+        ti_draw.fill_rect(0, 214, 320, 26)
+        ti_draw.set_color(220, 235, 255)
+        ti_draw.draw_text(8, 220, "[ENTER] / [CLEAR] Return to Menu")
+        ti_system.get_key(1)
+    except Exception: pass
+
+def prompt_ti_input(title, prompt, default_val=""):
     if HAS_TI:
         try:
             ti_system.disp_clr()
-            ti_system.disp_at(1, "FlowCE Lite CAS", align="center")
-            ti_system.disp_at(3, "Ready.")
+            ti_system.disp_at(1, "--- " + str(title) + " ---", "center")
+            ti_system.disp_at(3, str(prompt))
+            if default_val: ti_system.disp_at(5, "[Default: " + str(default_val) + "]")
         except Exception: pass
-    print("FlowCE Lite CAS (TI-84 Evo). Type 'quit' to exit.")
+    try:
+        val = input(prompt).strip()
+    except Exception: val = ""
+    return val if val else default_val
+
+def run_action(idx):
+    try:
+        if idx == 0:
+            f = prompt_ti_input("Differentiate", "f(x) = ")
+            if not f or f.lower() in ("q", "menu", "exit"): return
+            v = prompt_ti_input("Differentiate", "var [x] = ", "x")
+            res = diff(f, v)
+            draw_result_screen("Derivative", "d/d" + v + "(" + f + ")", str(res))
+        elif idx == 1:
+            f = prompt_ti_input("Integrate", "f(x) = ")
+            if not f or f.lower() in ("q", "menu", "exit"): return
+            v = prompt_ti_input("Integrate", "var [x] = ", "x")
+            la = prompt_ti_input("Integrate", "lower lim [none] = ", "")
+            if la:
+                lb = prompt_ti_input("Integrate", "upper lim = ", "")
+                res = integrate(f, v, la, lb)
+                draw_result_screen("Definite Integral", "S[" + la + ".." + lb + "] " + f + " d" + v, str(res))
+            else:
+                res = integrate(f, v)
+                draw_result_screen("Indefinite Integral", "S " + f + " d" + v, str(res) + " + C")
+        elif idx == 2:
+            f = prompt_ti_input("Simplify", "expr = ")
+            if not f or f.lower() in ("q", "menu", "exit"): return
+            res = simplify(parse(f))
+            draw_result_screen("Simplify", f, str(res))
+        elif idx == 3:
+            f = prompt_ti_input("Evaluate", "expr = ")
+            if not f or f.lower() in ("q", "menu", "exit"): return
+            x_val = prompt_ti_input("Evaluate", "x = ", "1")
+            val = float(x_val) if '.' in x_val else int(x_val)
+            res = to_expr(f).subs("x", val).evalf()
+            draw_result_screen("Evaluate", f + " @ x=" + x_val, str(res))
+        elif idx == 4:
+            run_interactive_shell()
+    except Exception as err:
+        draw_result_screen("Error", "Execution Error", str(err))
+    finally:
+        try: gc.collect()
+        except Exception: pass
+
+def run_interactive_shell():
+    if HAS_TI:
+        try:
+            ti_system.disp_clr()
+            ti_system.disp_at(1, "FlowCE Lite Terminal", "center")
+            ti_system.disp_at(3, "Type 'menu' to return")
+        except Exception: pass
+    print("FlowCE Lite Terminal. Type expression or 'menu' to return.")
     while True:
         try:
-            line = input("CAS> ")
-            if not line or line.strip().lower() in ("quit", "exit"): break
-            print("= %s" % str(simplify(parse(line))))
+            line = input("CAS> ").strip()
+            if not line: continue
+            if line.lower() in ("menu", "quit", "exit", "q"): break
+            lower = line.lower()
+            if lower.startswith("diff "):
+                parts = line[5:].split()
+                var = parts[1] if len(parts) > 1 else "x"
+                print("= %s" % str(diff(parts[0], var)))
+            elif lower.startswith("int "):
+                parts = line[4:].split()
+                var = parts[1] if len(parts) > 1 else "x"
+                print("= %s + C" % str(integrate(parts[0], var)))
+            elif lower.startswith("sim "):
+                print("= %s" % str(simplify(parse(line[4:]))))
+            else:
+                print("= %s" % str(simplify(parse(line))))
             try: gc.collect()
             except Exception: pass
-        except Exception as err:
-            print("Error: %s" % str(err))
+        except (KeyboardInterrupt, EOFError): break
+        except Exception as err: print("Error: %s" % str(err))
+
+def run_ti_gui():
+    selected = 0
+    num_opts = len(MENU_ITEMS)
+    while True:
+        draw_gui_menu(selected)
+        try: k = ti_system.get_key(1)
+        except Exception: k = ti_system.disp_wait()
+        if k == "" or k is None: break
+        if k in (82, '1'): run_action(0)
+        elif k in (83, '2'): run_action(1)
+        elif k in (84, '3'): run_action(2)
+        elif k in (72, '4'): run_action(3)
+        elif k in (73, '5'): run_action(4)
+        elif k in (25, 'up'): selected = (selected - 1) % num_opts
+        elif k in (35, 'down'): selected = (selected + 1) % num_opts
+        elif k in (105, 95, 'enter', '\n'): run_action(selected)
+        elif k in (45, 'clear', 'esc', 'exit', 'q'): break
+    try:
+        ti_draw.clear()
+        ti_system.disp_clr()
+    except Exception: pass
+
+def run_pc_cli():
+    print("FlowCE Lite CAS (TI-84 Evo)")
+    for item in MENU_ITEMS: print(" " + item)
+    print(" [q] Exit")
+    while True:
+        try:
+            choice = input("\nSelect [1-5, q]: ").strip().lower()
+            if not choice: continue
+            if choice in ("q", "quit", "exit"): break
+            if choice in ("1", "2", "3", "4", "5"):
+                run_action(int(choice) - 1)
+            else:
+                print("= %s" % str(simplify(parse(choice))))
+        except (KeyboardInterrupt, EOFError): break
+        except Exception as err: print("Error: %s" % str(err))
+
+def main():
+    if HAS_TI: run_ti_gui()
+    else: run_pc_cli()
 
 if __name__ == "__main__":
     main()

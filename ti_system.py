@@ -44,11 +44,21 @@ def disp_at(row, col_or_text, text=None, align="left"):
         msg = str(col_or_text)
         align_mode = align
         col_idx = 0
+    elif text in ("left", "center", "right") and not isinstance(col_or_text, int):
+        # disp_at(row, text, align) with positional align
+        msg = str(col_or_text)
+        align_mode = text
+        col_idx = 0
     else:
         # disp_at(row, col, text, align)
-        col_idx = int(col_or_text) - 1
-        msg = str(text)
-        align_mode = align
+        try:
+            col_idx = int(col_or_text) - 1
+            msg = str(text)
+            align_mode = align
+        except (ValueError, TypeError):
+            col_idx = 0
+            msg = str(col_or_text)
+            align_mode = str(text)
 
     _history.append(("disp_at", row, col_or_text, text, align_mode))
 

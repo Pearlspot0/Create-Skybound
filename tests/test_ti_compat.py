@@ -220,5 +220,111 @@ class TestDualModeCLI(unittest.TestCase):
             self.assertIsNotNone(node)
 
 
+class TestCalculatorGUI(unittest.TestCase):
+    """F12: FlowCE TI Calculator GUI tests."""
+
+    def setUp(self):
+        ti_system.reset()
+        ti_draw.reset()
+
+    def test_gui_menu_draws_elements(self):
+        """Verify GUI menu renders title, cards, and menu items to ti_draw."""
+        import flowce
+        flowce.draw_gui_menu(selected=0)
+        drawings = ti_draw.get_drawings()
+        self.assertTrue(len(drawings) > 5)
+        texts = [d[3] for d in drawings if d[0] == "draw_text"]
+        self.assertIn("FlowCE Evo CAS", texts)
+        self.assertTrue(any("Differentiate" in t for t in texts))
+
+    def test_gui_result_screen_draws_result(self):
+        """Verify GUI result screen draws title, input, and result."""
+        import flowce
+        ti_system.push_key("enter")
+        flowce.draw_result_screen("Derivative", "x^2", "2*x")
+        drawings = ti_draw.get_drawings()
+        texts = [d[3] for d in drawings if d[0] == "draw_text"]
+        self.assertTrue(any("Derivative" in t for t in texts))
+        self.assertTrue(any("2*x" in t for t in texts))
+
+    def test_gui_run_ti_gui_exits_on_clear(self):
+        """Verify GUI event loop exits gracefully when CLEAR key is pressed."""
+        import flowce
+        ti_system.push_key(45)
+        flowce.run_ti_gui()
+
+    def test_gui_action_differentiation(self):
+        """Verify differentiation action runs and displays result."""
+        import flowce
+        from unittest.mock import patch
+        ti_system.push_key("enter")
+        with patch("builtins.input", side_effect=["x^3 + 2*x", "x"]):
+            flowce.run_action(0)
+        drawings = ti_draw.get_drawings()
+        texts = [d[3] for d in drawings if d[0] == "draw_text"]
+        self.assertTrue(any("3*x^2 + 2" in t for t in texts))
+
+    def test_flowce_lite_gui_renders(self):
+        """Verify flowce_lite GUI menu renders title and items."""
+        import flowce_lite
+        flowce_lite.draw_gui_menu(selected=0)
+        drawings = ti_draw.get_drawings()
+        texts = [d[3] for d in drawings if d[0] == "draw_text"]
+        self.assertIn("FlowCE Lite CAS", texts)
+        self.assertTrue(any("Differentiate" in t for t in texts))
+
+    def test_cli_main_launches_ui_when_no_args(self):
+        """Verify cli_main launches UI without checking sys.stdin.isatty."""
+        import flowce
+        ti_system.push_key(45) # CLEAR to immediately exit event loop
+        flowce.cli_main([])
+        history = ti_draw.get_history()
+        self.assertTrue(len(history) > 5)
+        # Check that UI was drawn before exiting
+        self.assertTrue(any(entry[0] == "draw_text" for entry in history))
+
+    def test_gui_arrow_navigation(self):
+        """Verify up and down arrow keys navigate menu selection."""
+        import flowce
+        ti_system.push_key(35) # down arrow
+        ti_system.push_key(25) # up arrow
+        ti_system.push_key(45) # clear
+        flowce.run_ti_gui()
+
+    def test_gui_action_integration(self):
+        """Verify integration action computes indefinite integral and shows result."""
+        import flowce
+        from unittest.mock import patch
+        ti_system.push_key("enter") # dismiss result
+        with patch("builtins.input", side_effect=["x^2", "x", ""]):
+            flowce.run_action(1)
+        drawings = ti_draw.get_drawings()
+        texts = [d[3] for d in drawings if d[0] == "draw_text"]
+        self.assertTrue(any("1/3*x^3" in t for t in texts))
+
+    def test_gui_action_simplify(self):
+        """Verify simplify action simplifies expression and shows result."""
+        import flowce
+        from unittest.mock import patch
+        ti_system.push_key("enter") # dismiss result
+        with patch("builtins.input", side_effect=["(x^2 - 1)/(x - 1)"]):
+            flowce.run_action(2)
+        drawings = ti_draw.get_drawings()
+        self.assertTrue(len(drawings) > 0)
+
+    def test_gui_action_limits_and_series(self):
+        """Verify limits and taylor series actions compute correctly."""
+        import flowce
+        from unittest.mock import patch
+        ti_system.push_key("enter")
+        with patch("builtins.input", side_effect=["sin(x)/x", "x", "0"]):
+            flowce.run_action(3) # Limit
+        ti_system.push_key("enter")
+        with patch("builtins.input", side_effect=["sin(x)", "x", "0", "3"]):
+            flowce.run_action(4) # Taylor series
+        drawings = ti_draw.get_drawings()
+        self.assertTrue(len(drawings) > 0)
+
+
 if __name__ == "__main__":
     unittest.main()

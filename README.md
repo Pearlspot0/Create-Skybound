@@ -60,8 +60,32 @@ MemoryError: memory allocation failed, allocating ... bytes
    * If you recently ran another script in Python, exit the Python App completely to release the MicroPython shell memory, then relaunch it.
 
 4. **Choose the Right Edition for Your Device:**
-   * **`flowce.py` (Standard Edition, ~36 KB)**: Full CAS engine with step-by-step differentiation explanations, Taylor series, limits/L'Hôpital's rule, and calculus geometry (tangent/normal lines). Recommended when you have $\ge 70$ KB of free RAM.
-   * **[`flowce_lite.py`](flowce_lite.py) (Lite Edition, ~18 KB)**: Streamlined, ultra-compact CAS engine with exact fractions, symbolic differentiation, symbolic & definite integrals, algebraic simplification, and interactive REPL. Recommended for memory-constrained environments or when you have many active variables in RAM.
+   * **`flowce.py` (Standard Edition, ~45 KB)**: Full CAS engine with graphical FlowCE dashboard, step-by-step differentiation explanations, Taylor series, limits/L'Hôpital's rule, and calculus geometry (tangent/normal lines). Recommended when you have $\ge 70$ KB of free RAM.
+   * **[`flowce_lite.py`](flowce_lite.py) (Lite Edition, ~26 KB)**: Streamlined, ultra-compact CAS engine with graphical FlowCE dashboard, exact fractions, symbolic differentiation, symbolic & definite integrals, algebraic simplification, and interactive REPL. Recommended for memory-constrained environments or when you have many active variables in RAM.
+
+---
+
+## 🎮 Calculator Graphical User Interface (GUI)
+
+When launched from the calculator's **Python** menu, FlowCE opens directly into an interactive 320×240 color LCD GUI:
+
+* **Header Banner**: FlowCE theme banner displaying title, edition, and status.
+* **Interactive Menu**:
+  * `[1]` **Differentiate** (`d/dx`) — derivative with respect to any variable.
+  * `[2]` **Integrate** (`∫ dx`) — indefinite and definite integrals with exact limits.
+  * `[3]` **Simplify** — algebraic simplification, rational cancellation, and like-term combination.
+  * `[4]` **Limits** — limits via direct evaluation, factoring, and L'Hôpital's rule.
+  * `[5]` **Taylor Series** — Taylor / Maclaurin polynomial expansion to order $n$.
+  * `[6]` **Tangent Line** — tangent line $y = mx + b$ at point $x = c$.
+  * `[7]` **Normal Line** — normal line perpendicular to curve at point $x = c$.
+  * `[8]` **Evaluate / Subs** — exact and numerical evaluation with variable substitutions.
+  * `[9]` **Interactive Shell** — live interactive CAS REPL console.
+* **Graphical Result Cards**: Every operation displays a formatted result card with the input query, divider, and highlighted result in exact textbook notation.
+* **Keypad Controls**:
+  * **`1`–`9`**: Instant selection of any menu operation.
+  * **`▲` / `▼` (Up / Down Arrows)**: Move menu highlight.
+  * **`[enter]`**: Select highlighted item / proceed to next step.
+  * **`[clear]`**: Return to main menu / exit program cleanly back to TI-OS.
 
 ---
 
@@ -121,7 +145,7 @@ Hardware mocks for TI proprietary modules (`ti_system`, `ti_draw`, `ti_plotlib`,
 pytest -v
 ```
 
-All 134 automated unit and property tests cover:
+All 144 automated unit and property tests cover:
 - Syntax & AST compliance (Python 3.4 enforcement)
 - TI hardware mock verification
 - Lexer & Precedence Parser
@@ -137,6 +161,6 @@ All 134 automated unit and property tests cover:
 
 * `flowce.py` - Core standalone Python CAS engine for TI-84 Evo.
 * `ti_system.py`, `ti_draw.py`, `ti_plotlib.py`, `ti_hub.py` - TI hardware mock modules for PC testing.
-* `tests/` - Comprehensive test suite (134 tests).
+* `tests/` - Comprehensive test suite (144 tests).
 * `TEST_INFRA.md` - Test architecture and coverage documentation.
 * `minecraft_mod/` - Archived files from the prior Create: Skybound Minecraft mod project.
